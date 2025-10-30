@@ -32,11 +32,12 @@
       BMI: {{ '%.1f'|format(bmi) }}{% if category %} ({{ category }}){% endif %}
     </p>
     {% endif %}
-
+    {% if bmi %}
     <img
-      src="{{ url_for('static', filename='images/bmichart.png') }}"
+      src="{{ url_for('bmi_plot') }}"
       alt="Photo"
       style="width: 500px; height: 500px"
     />
+    {% endif %}
   </body>
 </html>

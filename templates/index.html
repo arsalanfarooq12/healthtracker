@@ -4,40 +4,76 @@
     <meta charset="utf-8" />
     <title>Submit Measurements</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <style>
-      form {
-        display: grid;
-        gap: 8px;
-        max-width: 320px;
-      }
-      label {
-        font-weight: 600;
-      }
-    </style>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styleapp.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/herosection.css') }}"
+    />
   </head>
   <body>
-    <h3>Enter your measurements</h3>
-    <form method="post">
-      <label for="height">Height (cm)</label>
-      <input id="height" name="height" type="number" step="0.01" required />
-      <label for="weight">Weight (kg)</label>
-      <input id="weight" name="weight" type="number" step="0.1" required />
-      <button type="submit">Submit</button>
-    </form>
+    <!-- navigation bar  -->
+    <navbar class="navbar">
+      <div class="navbar-inner">
+        <a href="#">Home</a>
 
-    {% if height and weight %}
-    <p>Received: Height={{ height }} cm, Weight={{ weight }} kg</p>
-    {% endif %} {% if bmi is not none %}
-    <p>
-      BMI: {{ '%.1f'|format(bmi) }}{% if category %} ({{ category }}){% endif %}
-    </p>
-    {% endif %}
-    {% if bmi %}
-    <img
-      src="{{ url_for('bmi_plot') }}"
-      alt="Photo"
-      style="width: 500px; height: 500px"
-    />
-    {% endif %}
+        <a href="#form-section">BMI</a>
+
+        <a href="#">Foods</a>
+      </div>
+    </navbar>
+    <!-- hero section -->
+    <div class="container">
+      <main class="hero">
+        <h1>Welcome to Health Tracker</h1>
+        <p class="subtitle">
+          Track your BMI, see your progress, and get smarter food ideas—one step
+          at a time.
+        </p>
+        <blockquote>
+          “Small, steady steps transform health into a lasting habit.”
+        </blockquote>
+        <div class="heroposter">
+          <img
+            src="{{url_for('static', filename='images/heroposter.png')}}"
+            alt=" image"
+          />
+        </div>
+      </main>
+
+      <!-- input form to get user details -->
+      <div class="form" id="form-section">
+        <h3>Enter your measurements</h3>
+        <form method="post" class="input_form">
+          <label for="height">Height (cm)</label>
+          <input id="height" name="height" type="number" step="0.01" required />
+          <label for="weight">Weight (kg)</label>
+          <input id="weight" name="weight" type="number" step="0.1" required />
+          <button class="btn" type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+    <!-- output form the form and calculations -->
+    <div class="output_form">
+      {% if height and weight %}
+      <p>Received: Height={{ height }} cm, Weight={{ weight }} kg</p>
+      {% endif %} {% if bmi is not none %}
+      <p>
+        BMI: {{ '%.1f'|format(bmi) }}{% if category %} ({{ category }}){% endif
+        %}
+      </p>
+      {% endif %} {% if bmi %} {% endif %} {% with msgs =
+      get_flashed_messages(with_categories=true) %} {% if msgs %}
+      <ul>
+        {% for cat, msg in msgs %}
+        <li>{{ msg }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %} {% endwith %}
+
+      <img src="{{ url_for('bmi_plot') }}" alt="BMI plot" />
+    </div>
   </body>
 </html>

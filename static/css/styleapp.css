@@ -1,0 +1,242 @@
+/* root css */
+:root {
+  /* Neutrals and surfaces */
+  --bg: #0e0f12;
+  --surface: #17181c;
+  --text: #f5f7fa;
+  --muted: #c8ced8;
+
+  /* Accents and state */
+  --accent: #4f8cff;
+  --accent-2: #22c55e;
+  --danger: #ef4444;
+  --ring: #94a3b8;
+
+  /* Shape and elevation */
+  --radius: 12px;
+  --shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+/* Optional light theme */
+:root[data-theme="light"] {
+  --bg: #f6f7fb;
+  --surface: #ffffff;
+  --text: #0d0f12;
+  --muted: #4b5563;
+  --accent: #3b82f6;
+  --accent-2: #16a34a;
+  --danger: #dc2626;
+  --ring: #475569;
+  --shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* Reset + sensible defaults */
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  color: var(--text);
+  background: linear-gradient(180deg, var(--bg), var(--surface));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+  /* height: auto; */
+  /* display: block; */
+}
+
+/* container styles */
+.container {
+  width: min(100% - 2rem, 960px);
+  margin-inline: auto;
+  padding-block: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+.grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (max-width: 720px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1rem 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  width: 500px;
+  margin-bottom: 3rem;
+}
+
+/* graph css */
+
+/* global css for headings */
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  margin: 0 0 0.5rem;
+}
+h1 {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+}
+h2 {
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  color: var(--muted);
+}
+p {
+  color: var(--muted);
+  margin: 0.5rem 0 0;
+}
+.small {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+body {
+  background-image: url("../images/image-9.png"); /* Relative to the 'css' folder */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  color: beige;
+  /*margin to add navbar height  */
+  scroll-margin-top: 2rem;
+}
+.output_form {
+  color: bisque;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* navbar styles */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(8px);
+  background: color-mix(in oklab, var(--bg) 85%, transparent);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  text-decoration: none;
+}
+.navbar-inner {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  /* height: 56px; */
+  padding-inline: 1rem;
+  text-decoration: none;
+}
+.navbar-inner a {
+  color: var(--muted);
+  text-decoration: none;
+  padding: 0.5rem;
+  border-radius: 8px;
+}
+.navbar-inner a:hover,
+.navbar a[aria-current="page"] {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/*  global  css for the form elements */
+label {
+  display: block;
+  margin: 0.75rem 0 0.25rem;
+  color: var(--muted);
+}
+.input,
+input[type="number"],
+input[type="text"],
+select {
+  width: 100%;
+  background: #0c0d10;
+  color: var(--text);
+  border: 1px solid #2a2d33;
+  border-radius: calc(var(--radius) - 6px);
+  padding: 0.7rem 0.85rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.05s;
+}
+.input:hover,
+input:hover,
+select:hover {
+  border-color: #3a3f47;
+}
+.input:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 35%, transparent);
+}
+.help {
+  color: var(--muted);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+.error {
+  color: var(--danger);
+  font-size: 0.9rem;
+}
+
+/* css for buttons */
+.btn {
+  appearance: none;
+  border: 1px solid transparent;
+  background: var(--accent);
+  color: white;
+  padding: 0.7rem 1rem;
+  border-radius: calc(var(--radius) - 6px);
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.06s ease, filter 0.2s ease, background 0.2s ease;
+}
+.btn:hover {
+  filter: brightness(1.05);
+}
+.btn:active {
+  transform: translateY(1px);
+}
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text);
+  border-color: #2f3640;
+}
+.btn-success {
+  background: var(--accent-2);
+}
+.btn-danger {
+  background: var(--danger);
+}
